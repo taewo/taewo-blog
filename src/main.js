@@ -12,31 +12,34 @@ Vue.config.productionTip = false
 const store = new Vuex.Store({
   state: {
     count: 0,
-    text: '',
   },
   mutations: {
-    increment (state) {
+    INCREMENT (state) {
       state.count += 1
     },
-    decrement (state) {
+    DECREMENT (state) {
       state.count -= 1
     },
-    reset (state) {
+    RESET (state) {
       state.count = 0
     },
-    asycFunc (state) {
-      setTimeout(() => {
-        state.count += 2
-      }, 1000)
+    ASYNC_FUNC (state) {
+      state.count += 20
     },
-    taewoong (state) {
-      state.text += 'taewoong '
-    }
   },
   actions: {
-    callMyName ({commit}) {
-      console.log('commit', commit);
-      commit('taewoong')
+    actionA ({commit}) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          commit('ASYNC_FUNC')
+          resolve('Hello Promise')
+        }, 1000)
+      });
+    },
+    actionB ({commit, dispatch}) {
+      return dispatch('actionA').then(() => {
+        commit('DECREMENT')
+      })
     }
   }
 })

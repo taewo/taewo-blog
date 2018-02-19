@@ -1,18 +1,14 @@
 <template lang="html">
   <div class="">
-    <h3>Counter</h3>
+    Counter
+    값: {{ this.$store.state.count}} <br />
 
-    값: {{ this.$store.state.count }}<br />
-    값: {{ this.$store.state.text }}<br />
-
-    <input type="button" @click="increment" name="" value="+">
-    <input type="button" name="" @click="decrement" value="-">
-    <input type="button" name="" @click="reset" value="reset">
-    <input type="button" name="" @click="asycFunc" value="async">
-    <input type="button" name="" @click="taewoong" value="text">
-
-    <br /><br /><br />
-    <input type="button" @click="routeHelloWorld" name="" value="<<<<">
+    <input type="button" @click="add" name="" value="++">
+    <input type="button" name="" @click="del" value="--">
+    <input type="button" name="" @click="reset" value="**">
+    <input type="button" name="" @click="asyncFunc" value="Async">
+    <input type="button" name="" @click="taewoong" value="Async">
+    <input type="button" @click="routeHelloWorld" value="<<<<">
   </div>
 </template>
 
@@ -23,24 +19,29 @@ export default {
     routeHelloWorld () {
       this.$router.push('/')
     },
-    increment () {
-      this.$store.commit('increment')
-      console.log('increment');
+    add () {
+      console.log('add add', this);
+      this.$store.commit('INCREMENT')
     },
-    decrement () {
-      this.$store.commit('decrement')
-      console.log('decrement');
+    del () {
+      console.log('del');
+      this.$store.commit('DECREMENT')
+
     },
     reset () {
-      this.$store.commit('reset')
       console.log('reset');
+      this.$store.commit('RESET')
+
     },
-    asycFunc () {
-      this.$store.commit('asycFunc')
-      console.log('async');
+    asyncFunc () {
+      console.log('asyncFunc');
+      this.$store.commit('ASYNC_FUNC')
     },
     taewoong () {
-      this.$store.dispatch('callMyName', 222)
+      this.$store.dispatch('actionB')
+      .then((a) => {
+        console.log('a', a);
+      })
     }
   }
 }
