@@ -13,7 +13,7 @@
         <li>{{key}} : {{value}}</li>
       </ul>
     </div>
-
+    <input type="button" @click="routeCounter" value=">>>>">
   </div>
 </template>
 
@@ -28,6 +28,9 @@ export default {
     }
   },
   methods: {
+    routeCounter() {
+      this.$router.push('Counter')
+    },
     submit(e) {
       if (e.keyCode === 13 || e.type === 'click') {
         this.writeUserData(this.name, this.input)
